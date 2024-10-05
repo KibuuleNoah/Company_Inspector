@@ -1,5 +1,7 @@
 # Company Inspector – Streamlined Employee and Team Verifier for Businesses
 
+![Company Inspector Banner](./Company_Inspector_inline.png)
+
 **Company Inspector** is a powerful Python Flask-based web application designed to simplify employee and team management for businesses of any size. Whether you're an administrator overseeing multiple teams or an external user seeking to verify employee credentials, this app offers a seamless, secure solution.
 
 ## Key Features
