@@ -1,0 +1,53 @@
+{% from "macros.html" import flashed_messages %}
+
+{% extends "auth/base.html" %} 
+{% block title %}Admin &middot; SignIn{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center">
+  <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+    <div class="auth-card">
+      <div class="logo-area">
+        <img id="header_logo" class="logo rounded" src="{{url_for('static',filename='imgs/Company_Inspector_logo.png')}}" />
+      </div>
+
+      <h5 class="auth-title">Company &middot; Inspector</h5>
+
+      <hr class="separator" />
+      {{flashed_messages()}}
+
+      <form method="post" class="p-4 border rounded mt-4">
+        <h3 class="text-cstm-primary">Company Admin Sign-In</h3>
+
+        <div class="form-group">
+          <label for="adminEmail">Email address</label>
+          <input type="email" class="form-control" name="adminEmail" id="adminEmail" required />
+        </div>
+
+        <div class="form-group">
+          <label for="adminPassword">Password</label>
+          <input
+              type="password"
+              class="form-control"
+              name="adminPassword"
+              id="adminPassword"
+              required
+              />
+        </div>
+
+        <div class="form-group m-3">
+          <input type="checkbox" name="adminRememberMe" id="adminRememberMe" />
+          <label class="form-check-label" for="adminRememberMe">Remember me</label>
+        </div>
+
+        <button type="submit" class="btn auth-btn">Sign In</button>
+      </form>
+
+      <p class="text mb-4">
+      Not Yet An Admin, Become
+      <a href="/auth/admin/signup/" class="text-link"> One?</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

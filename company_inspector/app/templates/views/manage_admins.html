@@ -1,0 +1,109 @@
+{% extends "views/base.html" %}
+
+{% block title %}{{current_user.fullname}} &middot; Manage Admins{% endblock %}
+
+{% block content %}
+<div>
+  <h1 class="text-center mb-4">Admin Management</h1>
+  <div class="row">
+    <!-- Pending Admins -->
+    <div class="col-md-6 mb-4">
+      <div class="card border-warning">
+        <div class="card-header bg-warning text-white">
+          <i class="bi bi-hourglass-split text-white"></i> Pending Admins
+        </div>
+        {% if admins["pending"] %}
+        <ul class="list-group list-group-flush">
+          {% for admin in admins["pending"] %}
+          <li class="list-group-item border-warning">
+            <div class="row">
+              <div class="col-12 text-center">
+                <span><i class="bi bi-person-fill text-warning"></i><b>{{admin.fullname}}</b> </span>
+                <hr>
+              </div>
+              <div class="col-6">
+                <i class="bi bi-building text-warning"></i> {{admin.department}}
+                <hr>
+
+              </div>
+              <div class="col-6">
+                <i class="bi bi-telephone-fill text-warning"></i> {{admin.phonenumber}}
+                <hr>
+
+              </div>
+              <div class="col-12 d-flex justify-content-center">
+                <a href="/auth/admin/deny/{{admin.id}}/" class="btn mx-4 border-0"><i class="bi bi-x-circle-fill text-danger"></i> Deny</a>
+                <a href="/auth/admin/approve/{{admin.id}}/" class="btn mx-4 border-0"><i class="bi bi-check-circle-fill text-success"></i> Approve</a>
+              </div>
+            </div>
+          </li>
+          {% endfor %}  
+        </ul>
+        {% else %}
+        <div class="d-flex justify-content-center align-items-center text-secondary" style="height:10rem;">
+          No Admin Request Available
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <!-- Approved Admins -->
+    <div class="col-md-6">
+      <div class="card border-success">
+        <div class="card-header bg-success text-white">
+          <i class="bi bi-check-circle-fill text-white"></i> Approved Admins
+        </div>
+        {% if  admins["approved"] %}
+        <ul class="list-group list-group-flush">
+          {% for admin in admins["approved"] %}
+          
+          <li class="list-group-item border-success {% if admin.is_suspended %}suspended-admin{% endif %}">
+            <div class="row">
+              <div class="col-12 text-center">
+                {% if admin.is_suspended %}
+                
+                  <span class="text-danger"><i class="bi bi-person-x text-danger"></i><b>{{admin.fullname}}</b> </span>
+                
+                {% else %}
+                  
+                  <span><i class="bi bi-person-fill text-success"></i><b>{{admin.fullname}}</b> </span>
+                
+                {% endif %}
+                <hr>
+              </div>
+              <div class="col-6">
+                <i class="bi bi-building text-success"></i> {{admin.department}}
+                <hr>
+
+              </div>
+              <div class="col-6">
+                <i class="bi bi-telephone-fill text-success"></i> {{admin.phonenumber}}
+                <hr>
+
+              </div>
+              <div class="col-12 d-flex justify-content-center">
+                <button type="button" class="btn mx-4 border-0" onclick="deleteAdmin({{admin.id}});"><i class="bi bi-trash-fill text-danger"></i> Delete</button>         
+                {% if admin.is_suspended %}
+                
+                  <button type="button" class="btn mx-4 border-0" onclick="resumeAdmin({{admin.id}});"><i class="bi bi-play-fill text-success"></i> Resume</button>
+                
+                {% else %}
+                
+                  <button type="button" class="btn mx-4 border-0" onclick="suspendAdmin({{admin.id}});"><i class="bi bi-pause-fill text-warning"></i> Suspend</button>
+                
+                {% endif %}
+              </div>
+
+            </div>
+          </li>
+          {% endfor %}  
+        </ul>
+        {% else %}
+        <div class="d-flex justify-content-center align-items-center text-secondary" style="height:10rem;">
+          No Approved Admins
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

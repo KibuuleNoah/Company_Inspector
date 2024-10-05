@@ -1,0 +1,136 @@
+@import url("shared.css");
+
+.bg-theme {
+  background: var(--primary-color) !important;
+  color: var(--primary-color-light) !important;
+}
+
+div.dataTables_length label {
+  float: left;
+  text-align: left;
+}
+
+div.dataTables_length select {
+  width: 75px;
+}
+
+div.dataTables_filter label {
+  float: left;
+  margin: 0.5rem;
+}
+
+div.dataTables_paginate ul.pagination {
+  margin: 1rem;
+}
+
+li.paginate_button.page-item.active a.page-link {
+  background-color: var(--primary-color) !important;
+  color: var(--primary-color-light);
+  border-color: var(--primary-color);
+}
+
+.table-fixed-header {
+  overflow-y: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.table-fixed-header thead,
+.table-fixed-header thead th {
+  position: sticky;
+  top: -2px;
+  text-wrap: nowrap;
+  background-color: var(--primary-color-light);
+}
+
+table thead,
+table thead th {
+  text-wrap: nowrap;
+}
+
+table {
+  display: none;
+}
+
+.alert {
+  transition: all 2s !important;
+}
+
+.hidden {
+  opacity: 0;
+  height: 0;
+  transition: all 2s;
+}
+
+button.shadow:hover {
+  box-shadow: 0 0.5rem 1rem var(--primary-color) !important;
+  border-color: var(--primary-color);
+}
+
+.show {
+  opacity: 1;
+  height: auto;
+}
+
+.text-cstm-primary {
+  color: var(--primary-color);
+}
+
+input.form-control,
+select.form-select,
+textarea.form-control {
+  background: white;
+  border: 1px solid rgb(220, 220, 220);
+  color: rgb(46, 46, 46);
+  box-shadow: none !important;
+}
+
+input.form-control:focus,
+select.form-select:focus,
+textarea.form-control {
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+input.edit {
+  background: inherit;
+  color: var(--primary-color-light);
+  border: 0;
+  border-bottom: 3px solid var(--primary-color-light);
+}
+input.edit:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.bg-theme {
+  background: var(--primary-color);
+}
+
+i {
+  color: var(--primary-color);
+}
+
+.suspended-admin {
+  background: rgba(255, 0, 0, 0.35);
+}
+
+.suspended-admin * {
+  color: red;
+}
+
+.suspended-admin i {
+  color: var(--primary-color-light) !important;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

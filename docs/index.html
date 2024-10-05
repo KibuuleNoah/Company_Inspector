@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Company Inspector Documentation</title>
+    <link rel="stylesheet" href="asserts/css/styles.css" />
+    <link rel="stylesheet" href="asserts/css/prism.css" />
+    <link
+      rel="stylesheet"
+      href="asserts/icons/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+    <a id="to-top" href="#toc"><i class="bi bi-arrow-up fs-3"></i></a>
+    <!-- Header Section -->
+    <header>
+      <h1>Company Inspector</h1>
+      <p><strong>Version:</strong> 1.0.0</p>
+      <p><strong>Author:</strong> Kibuule Noah</p>
+      <p><strong>Date:</strong> August 22, 2024</p>
+    </header>
+
+    <!-- Table of Contents -->
+    <nav id="toc">
+      <h2>Table of Contents</h2>
+      <ul>
+        <li>
+          <a href="#overview">Overview</a>
+        </li>
+        <li>
+          <a href="#features">Features</a>
+        </li>
+        <li>
+          <a href="#gettingStarted">Getting Started</a>
+        </li>
+        <li>
+          <a href="#administratorGuide">Administrator Guide</a>
+        </li>
+        <li><a href="#userGuide">User Guide</a></li>
+      </ul>
+    </nav>
+    <center>
+      <span id="desingedBy">Desinged And Write by Kibuule Noah</span>
+    </center>
+    <!-- Main Content -->
+    <main>
+      <section id="overview">
+        <h2><i class="bi bi-house"></i> Overview</h2>
+        <div>
+          <b>Company Inspector</b> is a Flask-based web application designed to
+          streamline the management and verification of employees and teams
+          within a company. Tailored for administrative use, the app offers
+          powerful tools for company admins to efficiently organize and
+          supervise their workforce. Additionally, it provides verification
+          capabilities for external users, allowing them to authenticate
+          employee and team details. With "Company Inspector," admins can easily
+          manage employee records, track team compositions, and oversee
+          day-to-day organizational structures. The verification feature ensures
+          that both internal and external parties can quickly validate the
+          authenticity of team members and employee credentials, promoting
+          transparency and trust within the company and with external partners.
+          The app combines intuitive management tools with robust security and
+          verification features, making it an essential resource for companies
+          looking to optimize their employee and team oversight processes.
+        </div>
+      </section>
+
+      <section id="features">
+        <h2><i class="bi bi-list-check"></i> Features</h2>
+        <div>
+          <ul class="items-deco-square indent-inner">
+            <li>
+              <strong>Employee and Team Management:</strong> Easily manage
+              employee records, track team compositions, and supervise
+              organizational structures.
+            </li>
+            <li>
+              <strong>External Verification:</strong> Allow external users to
+              verify employee and team details, promoting transparency and
+              trust.
+            </li>
+            <li>
+              <strong>Admin Tools:</strong> Powerful tools to organize and
+              monitor your workforce with ease.
+            </li>
+            <li>
+              <strong>Security Focused:</strong> Robust security features to
+              ensure data integrity and secure verification.
+            </li>
+            <li>
+              <strong>Export Employees Table to Excel:</strong> Download
+              employee data in Excel format for easier offline access and
+              analysis.
+            </li>
+            <li>
+              <strong>Export Employees Table to PDF:</strong> Generate PDF
+              reports of your employee data for formal documentation or sharing.
+            </li>
+            <li>
+              <strong>Import Employees as Excel:</strong> Quickly upload bulk
+              employee data via Excel files, streamlining data entry and
+              updates.
+            </li>
+            <li>
+              <strong>Role-Based Access:</strong> Supports 1 Super Admin and up
+              to 6 Mini Admins, with the Super Admin responsible for approving
+              and controlling these <strong>Mini Admins</strong>.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="gettingStarted">
+        <h2><i class="bi bi-play-circle"></i> Getting Started</h2>
+        <div>
+          <p>
+            This section will help you get started with setting up and running
+            the project on your local machine.
+          </p>
+          <h3>Setting Up Locally</h3>
+          <ol>
+            <li>
+              <h4>After Downloading the software</h4>
+              Locate the zip file from the asserts you downloaded
+              <strong>company_inspector.zip</strong> and copy it to your
+              preferred location. Once you have placed it in a convenient
+              location where you can easily access it using the terminal, follow
+              these steps depending on your operating system:
+            </li>
+            <li>
+              <h4>Open The Terminal or Command Prompt</h4>
+              <div>
+                <strong class="sys-type">Windows</strong>
+                <ol>
+                  <li>Click on the <strong>Start Menu</strong>.</li>
+                  <li>
+                    Type <code>cmd</code> in the search bar and hit
+                    <strong>Enter</strong>.
+                  </li>
+                </ol>
+              </div>
+              <div>
+                <strong class="sys-type">macOS</strong>
+                <ol>
+                  <li>Open <strong>Finder</strong>.</li>
+                  <li>
+                    Go to <strong>Applications</strong> >
+                    <strong>Utilities</strong>.
+                  </li>
+                  <li>Double-click <strong>Terminal</strong>.</li>
+                </ol>
+              </div>
+              <div>
+                <strong class="sys-type">Linux</strong>
+                <ol>
+                  <li>
+                    Press <strong>Ctrl + Alt + T</strong> on your keyboard.
+                  </li>
+                  <li>
+                    Alternatively, search for <strong>Terminal</strong> in your
+                    applications menu.
+                  </li>
+                </ol>
+              </div>
+            </li>
+            <li>
+              <h4>Change Dir To Zip</h4>
+              <p>
+                you will need to change directory to where you placed the zip
+                file
+              </p>
+              <div>
+                <strong class="sys-type">Windows</strong>
+                <pre
+                  class="custom-terminal"
+                ><code>cd C:\path\to\zip\location</code></pre>
+              </div>
+              <div>
+                <strong class="sys-type">macOS & Linux</strong>
+                <pre
+                  class="custom-terminal"
+                ><code>cd /path/to/zip/location</code></pre>
+              </div>
+            </li>
+            <li>
+              <h4>Unzip the zip file</h4>
+              <div>
+                <strong class="sys-type">Windows</strong>
+                <p>Use the following command to unzip a file:</p>
+                <pre
+                  class="custom-terminal"
+                ><code>tar -xf company_inspector.zip</code></pre>
+                <p>Alternatively, use PowerShell:</p>
+                <pre
+                  class="custom-terminal"
+                ><code>Expand-Archive -Path company_inspector.zip</code></pre>
+              </div>
+              <div>
+                <strong class="sys-type">macOS & Linux</strong>
+                <pre
+                  class="custom-terminal"
+                ><code>unzip company_inspector.zip</code></pre>
+              </div>
+            </li>
+            <li>
+              <h4>Change Dir To Project Directory</h4>
+              <div>
+                <strong class="sys-type">Windows</strong>
+                <p>After unzipping, change to the unzipped folder:</p>
+                <pre
+                  class="custom-terminal"
+                ><code>cd C:\company_inspector</code></pre>
+              </div>
+              <div>
+                <strong class="sys-type">macOS & Linux</strong>
+                <pre
+                  class="custom-terminal"
+                ><code>cd /company_inspector</code></pre>
+              </div>
+            </li>
+            <li>
+              <h4>Created a Virtual Environment</h4>
+              <div>
+                <strong class="sys-type">Windows, macOS & Linux</strong>
+                <pre
+                  class="custom-terminal"
+                ><code>python -m venv venv</code></pre>
+                <br />
+                <strong>OR</strong>
+                <br />
+                <pre
+                  class="custom-terminal"
+                ><code>python3 -m venv venv</code></pre>
+              </div>
+            </li>
+            <li>
+              <h4>Activating the Virtual Environment</h4>
+              <div>
+                <strong class="sys-type">Windows</strong>
+                <pre
+                  class="custom-terminal"
+                ><code>venv\Scripts\activate</code></pre>
+              </div>
+              <div>
+                <strong class="sys-type">macOS & Linux</strong>
+                <pre
+                  class="custom-terminal"
+                ><code>source venv/bin/activate</code></pre>
+              </div>
+            </li>
+            <strong>Then from there we move on to the next Step</strong>
+            <li>
+              <h3>Install Requirements</h3>
+              <p>Install the necessary Python packages:</p>
+              <pre
+                class="custom-terminal"
+              ><code>pip install -r requirements.txt</code></pre>
+            </li>
+            <li>
+              <h3>Set Up the Database</h3>
+              <p>
+                Initialize the database and apply migrations using
+                Flask-Migrate:
+              </p>
+              <pre class="custom-terminal"><code>flask db upgrade</code></pre>
+            </li>
+            <li>
+              <h3>Run the Application</h3>
+              <p>Start the Flask development server:</p>
+              <pre class="custom-terminal"><code>python main.py</code></pre>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="administratorGuide">
+        <h2><i class="bi bi-book"></i> Administrator Guide</h2>
+        <div>
+          After the server starts successfully, the main process will begin. As
+          mentioned earlier, authentication is part of this app, so you will
+          first need to sign up as a super admin to be authenticated.
+          <div>
+            <h3>Authentication</h3>
+            The super admin is the primary <b>driver</b> of this app, followed
+            by co-admins. The super admin is responsible for approving
+            co-admins, and only 10 admins, including the super admin, are
+            allowed.
+            <h4>Creating a Super Admin</h4>
+            Navigate to
+            <a class="url-display" href="/auth/admin/super/signup/"
+              >/auth/admin/super/signup/</a
+            >
+            <br />
+            Then, fill in the provided form.
+            <br />
+            <h4>Signing Back into the App</h4>
+            Navigate to
+            <a class="url-display" href="/auth/admin/signin/"
+              >/auth/admin/signin/</a
+            >
+            <br />
+            Then, fill in the provided form.
+            <br />
+            <h4>Requesting Admin Permission</h4>
+            Navigate to
+            <a class="url-display" href="/auth/admin/signup/"
+              >/auth/admin/signup/</a
+            >
+            <br />
+            Fill in the provided form. It doesn’t matter whether you are an
+            existing employee or not, as long as there are fewer than 10 admins.
+            <br />
+            Then wait for the super admin to approve your request. The sign-in
+            process is shown above.
+          </div>
+          <b
+            >Once you have access to the dashboard which is found at
+            <a class="url-display" href="/admin/">/admin/</a>, you can add
+            employees and group them.</b
+          >
+        </div>
+      </section>
+
+      <section id="userGuide">
+        <h2><i class="bi bi-book"></i> User Guide</h2>
+        <div>
+          To start verifying, no authentication or authorization is required.
+          Simply navigate to <a class="url-display" href="/">/</a>, where you
+          will find two tabs: <q>Verify Employee</q>, which can be used to
+          verify a single employee, and <q>Verify Team</q>, which can be used to
+          verify a team as a whole.
+          <br />
+          In either the Employee or Team verification input, just enter an
+          employee's or team's Alpha code respectively, and then hit "Verify" to
+          get the results.
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer>
+      <p><strong>End of Documentation</strong></p>
+    </footer>
+    <script src="asserts/js/prism.js"></script>
+    <script>
+      const codeElements = document.querySelectorAll(
+        "pre.custom-terminal code",
+      );
+
+      codeElements.forEach((code) => {
+        const text = code.textContent;
+        const command = text.split(" ")[0];
+        const args = text.replace(command, "").trim();
+        code.innerHTML = `<span class="command">${command}</span> <span class="args">${args}</span>`;
+      });
+    </script>
+  </body>
+</html>

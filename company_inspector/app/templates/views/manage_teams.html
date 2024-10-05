@@ -1,0 +1,180 @@
+{% extends "views/base.html" %}
+{% block title %}{{current_user.fullname}} &middot; Manage Teams{% endblock %}
+
+{% block content %}
+
+{% block styles %}
+<!-- Chosen CSS -->
+<link href="https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.min.css" rel="stylesheet" media="screen">
+{% endblock %}
+
+<section class="container mt-5">
+  <h1 class="text-center mb-4">Team Management</h1>
+  <button id="teamFormTrigger" class="btn shadow" data-bs-toggle="collapse" data-bs-target="#collapseEmployeeForm" aria-expanded="false" aria-controls="collapseEmployeeForm">
+    <i class="bi bi-person-add"></i> Add New 
+  </button>            
+  <div class="collapse col-md-6" id="collapseEmployeeForm">
+    <div class="card card-body">
+      <form method="post" name="teamForm" onsubmit="">
+
+        <div class="form-group mt-1">
+          <label for="teamName">Team Name</label>
+          <input type="text" class="form-control" name="teamName" required minlength="5">
+        </div>
+
+        <div class="form-group mt-1">
+          <label for="leader">Leader</label>
+          <select class="form-select" name="leader" required>
+            <option selected>select leader...</option>
+            {% for employee in  nonteamed_employees %}
+            <option value="{{employee.id}}">{{employee}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group mt-1">
+          <label for="members">Select Members</label>
+          <select multiple="multiple" id="members" name="members" class="chzn-select form-control" style="width:100%;border-radius;5px;" required>
+            {% for employee in  nonteamed_employees %}
+            <option value="{{employee.id}}">{{employee}}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group mt-1">
+          <label for="alphaCode">Alpha Code (optional)</label>
+          <input type="text" class="form-control" name="alphaCode">
+          <sup class="text-info">if left blank, it will be auto generated</sup>
+        </div>
+
+        <div class="form-group mt-1">
+          <label for="activities">Activities</label>
+          <textarea class="form-control" rows="8" id="activities" name="activities" placeholder="activity1, activity2, activity3" required></textarea>
+          <i class="bi bi-exclamation fs-4"> <sub><small>please separate each activity by a comma</small></sub></i>
+        </div>
+
+        <button type="submit" class="btn shadow mt-2">Save</button>
+      </form>
+    </div>
+  </div>
+
+  {% if teams %}
+
+  {% for team in teams[::-1] %}
+  <div class="card shadow-lg mt-3 mb-3" id="card-{{team.id}}">
+    <div class="card-header bg-theme text-white">
+      <h4 class="card-title mb-0">
+        <div class="row">
+          <div class="col-8 text-truncate">
+            <span class="team-name" id="team-name-{{team.id}}"><i class="bi bi-people-fill text-light"></i> {{team}}</span>
+          </div>
+          <div class="col-4 d-flex justify-content-end">
+            <span id="actions" class="fs-6" style="display:none">
+              <i class="bi bi-pencil-square mx-1 text-light" onclick="renameTeamName('team-name-{{team.id}}')"></i>
+              <i class="bi bi-trash text-light" onclick="deleteTeam({{team.id}})"></i>
+            </span>
+          </div>
+        </div>
+      </h4>
+    </div>
+    
+    <div class="card-body">
+      <!-- Team Leader -->
+      <div class="mb-4">
+        <h5 class="mb-3"><i class="bi bi-person-fill"></i> <span class="bg-theme text-white rounded-pill p-2">Team Leader</span></h5>
+        <div class="d-flex align-items-center ms-3">
+          <i class="bi bi-person-circle fs-1 me-3"></i>
+          <div>
+            <h6 class="mb-0">{{team.get_leader}}</h6>
+            <small>{{team.get_leader.job_title}}</small>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <!-- Team Members -->
+      <div class="mb-4">
+        <h5 class="mb-3"><i class="bi bi-people"></i> <span class="bg-theme text-white rounded-pill p-2">Team Members</span></h5>
+        <div class="row gap-1">
+          {% for member in team.get_members %}
+          <div class="col-md-5 d-flex justify-content-center border border-start-0 border-top-0">
+            <div class="d-flex align-items-center me-4 mb-3">
+              <h5><i class="bi bi-person"></i></h5>
+              <div>
+                <h6 class="mb-0 d-flex text-nowrap">{{member}}</h6>
+                <small class="text-secondary">{{member.job_title}}</small>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% if team.get_activities %}
+      
+      <hr>
+      <!-- Activities -->
+      <div class="m-2">
+        <h5 class="mb-3"><i class="bi bi-clipboard-check"></i> <span class="bg-theme text-white rounded-pill p-2">Activities</span></h5>
+        <ul class="list-group">
+
+          {% for activity in team.get_activities %}
+          
+          <li class="list-group-item d-flex justify-content-between align-items-center">{{activity}}</li>
+          
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% endif %}
+      <div class="text-center">
+        <i class="bi bi-identification-card"></i>
+        <strong><sup class="text-secondary">alpha code </sup>{{team.alpha_code}}</strong>
+      </div>
+
+    </div>
+  </div>
+  
+  {% endfor %}
+  
+  {% else %}
+
+  <div class="d-flex justify-content-center align-items-center text-secondary" style="height:10rem;">
+    No Teams Available
+  </div>
+
+  {% endif %}
+
+</section>
+
+{% endblock %}
+{% block scripts %}
+
+<!-- Chosen jQuery Plugin -->
+<script src="https://cdn.jsdelivr.net/npm/chosen-js@1.8.7/chosen.jquery.min.js"></script>
+
+<script>
+  $(function () {
+
+  });
+const maxOptions = 15; // limit to 3 selected options
+
+$('#employeeSelect').on('change', function() {
+  if ($(this).val().length > maxOptions) {
+    alert(`You can only select up to ${maxOptions} options.`);
+    $(this).val($(this).val().slice(0, maxOptions));
+  }
+});
+
+  $('#collapseEmployeeForm').on('shown.bs.collapse', function () {
+    $('#members').chosen('destroy').chosen({placeholder_text:"Select Members"}); 
+  });
+
+  $("#testBtn").on("click",function(){
+    $("#testDiv").slideToggle()
+  })
+
+  $('.card-header').on('click', function() {
+  $(this).find('span#actions').slideToggle();
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% from "macros.html" import flashed_messages %}
+
+{% extends "auth/base.html" %}
+{% block title %}SuperAdmin &middot; Signup{% endblock %}
+
+{% block content %} 
+<div class="page-content d-flex align-items-center">
+  <div class="container d-flex justify-content-center">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5">
+      <div class="auth-card">
+        <div class="logo-area">
+          <img id="header_logo" class="logo rounded" src="assets/img/logo.png" />
+        </div>
+
+        <h5 class="auth-title">Company &middot; Inspector</h5>
+
+        <hr class="separator" />
+        {{flashed_messages()}}
+
+        <form method="post" class="p-4 border rounded mt-4">
+          <h3 class="text-cstm-primary">Super Admin Signup</h3>
+
+          <div class="form-group">
+            <label for="adminName">Full Name</label>
+            <input type="text" class="form-control" name="adminName" id="adminName" required minlength="8">
+          </div>
+
+          <div class="form-group">
+            <label for="adminDepartment">Department</label>
+            <input type="text" class="form-control" name="adminDepartment" id="adminDepartment" required minlength="3">
+          </div>
+
+          <div class="form-group">
+            <label for="adminEmail">Email address</label>
+            <input type="email" class="form-control" name="adminEmail" id="adminEmail" required minlength="10">
+          </div>
+
+          <div class="form-group">
+            <label for="adminPassword1">Password</label>
+            <input type="password" class="form-control" name="adminPassword1" id="adminPassword1" required minlength="8">
+          </div>
+
+          <div class="form-group">
+            <label for="adminPassword2">Confirm Password</label>
+            <input type="password" class="form-control" name="adminPassword2" id="adminPassword2" required minlength="8">
+          </div>
+
+          <button type="submit" class="btn auth-btn">Sign Up</button>
+        </form>
+
+        <p class="text mb-4">
+        Don't have an account
+        <a href="/auth/signup/" class="text-link">Create One</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

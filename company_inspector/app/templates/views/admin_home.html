@@ -1,0 +1,122 @@
+{% extends "views/base.html" %} 
+{% block title %}{{current_user.fullname}} &middot; Home{% endblock %}
+
+{% block content %}
+<center class="mb-3">
+  <span id="selectedEmployees" class="bg-theme shadow rounded p-2 position-fixed" style="display:none;z-index:1;">
+    <span class=""><i class="bi bi-check text-white"></i><b>3</b></span>
+    <span class="">Selected</span>
+    <i class="bi bi-trash text-white ms-3" onclick="deleteSelectedEmpl()"></i>
+  </span>
+
+</center>
+<div class="span12">
+  <div class="row">
+    <div class="col-6">
+
+      <button class="btn shadow" data-bs-toggle="collapse" data-bs-target="#collapseEmployeeForm" aria-expanded="false" aria-controls="collapseEmployeeForm">
+        <i class="bi bi-person-add"></i> Add New 
+      </button>            
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+      <span class="dropdown">
+        <button class="btn shadow dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-tools"></i> Tools
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/export/emp/pdf">
+            <i class="bi bi-file-pdf"></i> Export as PDF
+          </a>
+          <a class="dropdown-item" href="/export/emp/xl">
+            <i class="bi bi-table"></i> Export as Excel
+          </a>
+          <label class="dropdown-item" for="importExcel">
+            <span><i class="bi bi-table"></i> Import Excel</span>
+            <input type="file" name="importExcel" id="importExcel" style="display:none;" onchange="importExcel(this)">
+          </label>
+        </div>
+      </span>
+    </div>
+    
+    <div class="col-12 col-md-6 mt-2">
+      <div class="collapse" id="collapseEmployeeForm">
+        <div class="card card-body">
+          <form method="POST" name="employeeForm">
+            <div class="form-group">
+              <label for="alphaCode">Alpha Code</label>
+              <input type="text" class="form-control" name="alphaCode" required minlength="3" maxlength="10">
+            </div>
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" name="firstName" required minlength="3" maxlength="20">
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" name="lastName" required minlength="3" maxlength="20">
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select class="form-select" name="gender">
+                <option selected>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="jobTitle">Job Title</label>
+              <input type="text" class="form-control" name="jobTitle" required minlength="3">
+            </div>
+            <div class="form-group">
+              <label for="department">Department</label>
+              <input type="text" class="form-control" name="department" required minlength="3">
+            </div>
+            <div class="form-group">
+              <label for="dateOfHire">Date of Hire</label>
+              <input type="date" class="form-control" name="dateOfHire" required>
+            </div>
+            <button type="submit" class="btn shadow mt-2">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  </div> 
+
+    <table
+      cellpadding="0"
+      cellspacing="0"
+      border="0"
+      class="table table-striped table-bordered"
+      id="employees"
+      style="border-radius: 5px;"
+      >
+      <thead class="shadow">
+        <tr>
+          <th>#</th>
+          <th scope="col">Alpha Code</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Job Title</th>
+          <th scope="col">Department</th>
+          <th scope="col">Date of Hire</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for employee in employees %}
+        <tr id="emp-{{employee.id}}">
+          <td class="table-check"><input type="checkbox" value="{{employee.id}}" onchange="queueEnqueueEmployee(this)"/></td>
+          <td id="{{employee.id}}-employeeId">{{employee.alpha_code}}</td>
+          <td id="{{employee.id}}-firstName">{{employee.first_name}}</td>
+          <td id="{{employee.id}}-lastName">{{employee.last_name}}</td>
+          <td id="{{employee.id}}-gender">{{employee.gender}}</td>
+          <td id="{{employee.id}}-jobTitle">{{employee.job_title}}</td>
+          <td id="{{employee.id}}-department">{{employee.department}}</td>
+          <td id="{{employee.id}}-dateOfHire">{{employee.clean_doh}}</td>
+        </tr>  
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+{% endblock %}
+

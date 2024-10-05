@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css')  }}"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+      @import url("{{url_for('static',filename='css/shared.css')}}");
+
+      body {
+        background-color: #eee;
+        font-family: "Poppins", sans-serif;
+        font-weight: 300;
+      }
+
+      .search {
+        position: relative;
+        box-shadow: 0 0 40px var(--primary-color);
+      }
+
+      .search input {
+        height: 60px;
+        text-indent: 25px;
+        border: 2px solid #d6d4d4;
+      }
+
+      .search input:focus {
+        box-shadow: none;
+        border: 2px solid var(--primary-color);
+      }
+
+      .search .bi-search {
+        position: absolute;
+        top: 20px;
+        left: 16px;
+      }
+
+      .search button {
+        color: #fff;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        height: 50px;
+        width: 110px;
+        background: var(--primary-color);
+        border-radius: 4px;
+        border: 1px solid var(--primary-color);
+        box-shadow: 0 1px 3px #000;
+      }
+
+      .search button:active {
+        border: 0;
+        box-shadow: 0 0 0 #000;
+      }
+
+      button.nav-link {
+        color: var(--primary-color);
+      }
+
+      button.active {
+        color: #fff;
+        background: var(--primary-color) !important;
+        border-radius: 4px;
+        border-color: var(--primary-color);
+      }
+    </style>
+
+    <!-- <style> -->
+    <!--   .employee-card { -->
+    <!--     max-width: 350px; -->
+    <!--     border: 1px solid #e0e0e0; -->
+    <!--     border-radius: 10px; -->
+    <!--     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); -->
+    <!--   } -->
+    <!---->
+    <!--   .employee-card .card-header { -->
+    <!--     background-color: #f8f9fa; -->
+    <!--     padding: 20px; -->
+    <!--     border-bottom: 1px solid #e0e0e0; -->
+    <!--   } -->
+    <!---->
+    <!--   .employee-card .employee-name { -->
+    <!--     font-size: 22px; -->
+    <!--     font-weight: 600; -->
+    <!--     color: #333; -->
+    <!--   } -->
+    <!---->
+    <!--   .employee-card .employee-title { -->
+    <!--     font-size: 16px; -->
+    <!--     color: #666; -->
+    <!--   } -->
+    <!---->
+    <!--   .employee-card .card-body { -->
+    <!--     padding: 20px; -->
+    <!--   } -->
+    <!---->
+    <!--   .employee-card .card-text { -->
+    <!--     margin-bottom: 10px; -->
+    <!--     font-size: 14px; -->
+    <!--     color: #555; -->
+    <!--   } -->
+    <!---->
+    <!--   .employee-card .card-footer { -->
+    <!--     background-color: #f8f9fa; -->
+    <!--     padding: 10px; -->
+    <!--     border-top: 1px solid #e0e0e0; -->
+    <!--   } -->
+    <!-- </style> -->
+    <style>
+      .team-card {
+        max-width: 500px;
+        margin: 0 auto;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .team-card .team-name {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .team-card .team-leader {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .team-card .card-body {
+        padding: 20px;
+      }
+
+      .team-card .list-group-item {
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-2">
+      <!-- Nav tabs -->
+      <div class="d-flex justify-content-center mb-3">
+        <ul class="nav nav-pills" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active"
+              id="verifyEmployee-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#verifyEmployee"
+              type="button"
+              role="tab"
+              aria-controls="verifyEmployee"
+              aria-selected="true"
+            >
+              Verify Employee
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="verifyTeam-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#verifyTeam"
+              type="button"
+              role="tab"
+              aria-controls="verifyTeam"
+              aria-selected="false"
+            >
+              Verify Team
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tab content -->
+      <div class="tab-content mt-3" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="verifyEmployee"
+          role="tabpanel"
+          aria-labelledby="verifyEmployee-tab"
+        >
+          <h3 class="text-center mb-5 mt-5">Verify Employee</h3>
+
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-8">
+              <div class="search">
+                <i class="bi bi-search"></i>
+                <input
+                  type="text"
+                  id="employeeVerifyInput"
+                  class="form-control"
+                  placeholder="Type Employee ID..."
+                />
+                <button onclick="verifyEmployee()">Verify</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="employeeVerifyRes" class="mb-4 mt-3"></div>
+
+          <!-- <div class="card employee-card mb-4"> -->
+          <!--   <i -->
+          <!--     class="bi bi-person-check text-center text-success" -->
+          <!--     style="font-size: 4rem" -->
+          <!--   ></i> -->
+          <!--   <div class="card-header text-center"> -->
+          <!--     <h2 class="employee-name"> -->
+          <!--       employee.first_name }} employee.last_name }} -->
+          <!--     </h2> -->
+          <!--     <h5 class="employee-title text-muted">employee.job_title }}</h5> -->
+          <!--   </div> -->
+          <!--   <div class="card-body"> -->
+          <!--     <p class="card-text"> -->
+          <!--       <strong>Employee ID:</strong> employee.employee_id }} -->
+          <!--     </p> -->
+          <!--     <p class="card-text"> -->
+          <!--       <strong>Department:</strong> employee.department }} -->
+          <!--     </p> -->
+          <!--     <p class="card-text"> -->
+          <!--       <strong>Gender:</strong> employee.gender }} -->
+          <!--     </p> -->
+          <!--     <p class="card-text"> -->
+          <!--       <strong>Date of Hire:</strong> -->
+          <!--       employee.date_of_hire.strftime('%B %d, %Y') }} -->
+          <!--     </p> -->
+          <!--   </div> -->
+          <!--   <div class="card-footer text-center"> -->
+          <!--     <small class="text-muted" -->
+          <!--       ><strong>Team ID:</strong> employee.alpha_code }}</small -->
+          <!--     > -->
+          <!--   </div> -->
+          <!-- </div> -->
+          <!-- <div class="card text-center employee-card mb-4"> -->
+          <!--   <div class="card-body"> -->
+          <!--     <i -->
+          <!--       class="bi bi-person-x text-center text-danger" -->
+          <!--       style="font-size: 4rem" -->
+          <!--     ></i> -->
+          <!--     <h4 class="card-title text-danger">Employee Not Known</h4> -->
+          <!--     <p class="card-text"> -->
+          <!--       The employee with that Id does not exist, Please Don't deal with -->
+          <!--       him or her -->
+          <!--     </p> -->
+          <!--   </div> -->
+          <!-- </div> -->
+        </div>
+        <div
+          class="tab-pane fade"
+          id="verifyTeam"
+          role="tabpanel"
+          aria-labelledby="verifyTeam-tab"
+        >
+          <h3 class="text-center mb-5 mt-5">Verify Team</h3>
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-8">
+              <div class="search">
+                <i class="bi bi-search"></i>
+                <input
+                  type="text"
+                  id="teamVerifyInput"
+                  class="form-control"
+                  placeholder="Type Team ID..."
+                />
+                <button onclick="verifyTeam()">Verify</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="teamVerifyRes" class="mb-4 mt-3"></div>
+          <!-- <div class="card team-card mb-4 mt-3"> -->
+          <!--   <div class="card-header text-center"> -->
+          <!--     <h3 class="team-name">Development Team</h3> -->
+          <!--     <p class="team-leader text-muted"> -->
+          <!--       <strong>Team Leader:</strong><br /> -->
+          <!--       <strong>John Doe</strong> - <small>Backend Developer</small> -->
+          <!--     </p> -->
+          <!--   </div> -->
+          <!--   <div class="card-body"> -->
+          <!--     <h5>Team Members</h5> -->
+          <!--     <ul class="list-group"> -->
+          <!--       <li class="list-group-item"> -->
+          <!--         <strong>Jane Smith</strong> - -->
+          <!--         <span class="text-muted">Backend Developer</span> -->
+          <!--       </li> -->
+          <!--       <li class="list-group-item"> -->
+          <!--         <strong>Michael Johnson</strong> - -->
+          <!--         <span class="text-muted">Frontend Developer</span> -->
+          <!--       </li> -->
+          <!--       <li class="list-group-item"> -->
+          <!--         <strong>Emily Davis</strong> - -->
+          <!--         <span class="text-muted">UX Designer</span> -->
+          <!--       </li> -->
+          <!--       <li class="list-group-item"> -->
+          <!--         <strong>Robert Brown</strong> - -->
+          <!--         <span class="text-muted">DevOps Engineer</span> -->
+          <!--       </li> -->
+          <!--     </ul> -->
+          <!--   </div> -->
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+    <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+    <script>
+      eruda.init();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{url_for('static', filename='js/index.js')}}"></script>
+    <script></script>
+  </body>
+</html>

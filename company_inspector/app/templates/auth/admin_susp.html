@@ -1,0 +1,29 @@
+{% extends "auth/base.html" %} 
+{% block title %}Admin Suspension{% endblock %}
+
+{% block content %} 
+<section class="container">
+  <div class="card shadow-lg">
+    <div class="card-header bg-danger text-white d-flex align-items-center">
+      <!-- Warning Icon -->
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>
+      <h3 class="card-title mb-0">Admin Account Suspension</h3>
+    </div>
+    <div class="card-body">
+      <!-- Info Icon and Message -->
+      <p class="lead">
+        <i class="bi bi-info-circle me-2"></i>
+        Your account has been suspended due to some violations.
+      </p>
+      <hr />
+      <p>If you believe this is a mistake, please contact the super admin</p>
+    </div>
+    <div class="card-footer text-muted text-center">
+      <small
+        ><i class="bi bi-clock me-1"></i>Account will be reviewed within
+        unsigned time frame</small
+      >
+    </div>
+  </div>
+</section>
+{% endblock %}
